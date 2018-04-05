@@ -24,7 +24,7 @@
     background: #fff;
     position: absolute;
     z-index: 1;
-    top: 10px;
+    top: 40%;
     right: 10px;
     border-radius: 3px;
     width: 120px;
@@ -121,7 +121,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "blue",
+        "line-color": "green",
         "line-width": 8
       }
     });
@@ -140,7 +140,34 @@
               [-122.48507022857666, 37.82944639795659],
               [-122.48610019683838, 37.82880236636284],
               [-122.48695850372314, 37.82931081282506],
-              [-122.48700141906738, 37.83080223556934],
+              [-122.48700141906738, 37.83080223556934]
+
+            ]
+          }
+        }
+      },
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round",
+        "visibility": 'visible'
+      },
+      "paint": {
+        "line-color": "red",
+        "line-width": 8
+      }
+    });
+
+    map.addLayer({
+      "id": "MediumTraffic",
+      "type": "line",
+      "source": {
+        "type": "geojson",
+        "data": {
+          "type": "Feature",
+          "properties": {},
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
               [-122.48751640319824, 37.83168351665737],
               [-122.48803138732912, 37.832158048267786],
               [-122.48888969421387, 37.83297152392784],
@@ -154,13 +181,14 @@
       "layout": {
         "line-join": "round",
         "line-cap": "round",
-        "visibility": 'none'
+        "visibility": 'visible'
       },
       "paint": {
-        "line-color": "red",
+        "line-color": "yellow",
         "line-width": 8
       }
     });
+
     /*map.loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Cat_silhouette.svg/400px-Cat_silhouette.svg.png', function(error, image) {
       if (error) throw error;
       map.addImage('cat', image);
@@ -191,7 +219,7 @@
     })*/
 
     map.addLayer({
-      "id": "places",
+      "id": "Sensors",
       "type": "symbol",
       "source": {
         "type": "geojson",
@@ -288,7 +316,7 @@
           .setHTML(description)
           .addTo(map);
       };
-      map.on('mouseenter', 'places', f);
+      map.on('mouseenter', 'Sensors', f);
       map.on('mouseenter', 'Signal', f);
       map.on('mouseenter', 'NormalTraffic', f);
 
@@ -297,13 +325,14 @@
       map.getCanvas().style.cursor = '';
       popup.remove();
     };
-      map.on('mouseleave', 'places', leave);
+      map.on('mouseleave', 'Sensors', leave);
       map.on('mouseleave', 'Signal', leave);
+      map.on('mouseleave', 'NormalTraffic', leave);
   })
 
 
 
-  var toggleableLayerIds = ['NormalTraffic', 'HighTraffic', 'Signal'];
+  var toggleableLayerIds = ['NormalTraffic', 'MediumTraffic', 'HighTraffic','Signal', 'Sensors'];
   for (var i = 0; i < toggleableLayerIds.length; i++) {
     var id = toggleableLayerIds[i];
 
